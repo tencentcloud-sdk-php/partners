@@ -18,26 +18,26 @@ namespace TencentCloud\Partners\V20180321\Models;
 use TencentCloud\Common\AbstractModel;
 
 /**
- * DescribeClientBalance返回参数结构体
+ * DescribeClientBaseInfo返回参数结构体
  *
- * @method integer getBalance() 获取账户可用余额，单位分 （可用余额 = 现金余额 - 冻结金额）
- * @method void setBalance(integer $Balance) 设置账户可用余额，单位分 （可用余额 = 现金余额 - 冻结金额）
- * @method integer getCash() 获取账户现金余额，单位分
- * @method void setCash(integer $Cash) 设置账户现金余额，单位分
+ * @method array getClientBaseSet() 获取代客基础信息数组
+ * @method void setClientBaseSet(array $ClientBaseSet) 设置代客基础信息数组
+ * @method integer getTotalCount() 获取符合条件的代客数
+ * @method void setTotalCount(integer $TotalCount) 设置符合条件的代客数
  * @method string getRequestId() 获取唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
  * @method void setRequestId(string $RequestId) 设置唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
  */
-class DescribeClientBalanceResponse extends AbstractModel
+class DescribeClientBaseInfoResponse extends AbstractModel
 {
     /**
-     * @var integer 账户可用余额，单位分 （可用余额 = 现金余额 - 冻结金额）
+     * @var array 代客基础信息数组
      */
-    public $Balance;
+    public $ClientBaseSet;
 
     /**
-     * @var integer 账户现金余额，单位分
+     * @var integer 符合条件的代客数
      */
-    public $Cash;
+    public $TotalCount;
 
     /**
      * @var string 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -45,8 +45,8 @@ class DescribeClientBalanceResponse extends AbstractModel
     public $RequestId;
 
     /**
-     * @param integer $Balance 账户可用余额，单位分 （可用余额 = 现金余额 - 冻结金额）
-     * @param integer $Cash 账户现金余额，单位分
+     * @param array $ClientBaseSet 代客基础信息数组
+     * @param integer $TotalCount 符合条件的代客数
      * @param string $RequestId 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     function __construct()
@@ -62,12 +62,17 @@ class DescribeClientBalanceResponse extends AbstractModel
         if ($param === null) {
             return;
         }
-        if (array_key_exists("Balance",$param) and $param["Balance"] !== null) {
-            $this->Balance = $param["Balance"];
+        if (array_key_exists("ClientBaseSet",$param) and $param["ClientBaseSet"] !== null) {
+            $this->ClientBaseSet = [];
+            foreach ($param["ClientBaseSet"] as $key => $value){
+                $obj = new ClientBaseElem();
+                $obj->deserialize($value);
+                array_push($this->ClientBaseSet, $obj);
+            }
         }
 
-        if (array_key_exists("Cash",$param) and $param["Cash"] !== null) {
-            $this->Cash = $param["Cash"];
+        if (array_key_exists("TotalCount",$param) and $param["TotalCount"] !== null) {
+            $this->TotalCount = $param["TotalCount"];
         }
 
         if (array_key_exists("RequestId",$param) and $param["RequestId"] !== null) {
